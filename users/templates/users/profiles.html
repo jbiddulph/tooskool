@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<!-- Main Section -->
+<main>
+    <section class="bg-indigo-100 py-8 mb-8">
+      <div class="container mx-auto md:w-[500px] w-[250px]">
+        <div>
+          <h2 class="text-4xl text-center pb-4">Search for <span class="font-bold">Parent</span></h2>
+        </div>
+
+        <div>
+          <form class="form" action="{% url 'profiles' %}" method="get">
+            <div class="flex flex-row justify-between">
+              <input id="formInput#search" class="w-full border-2 border-indigo-300 rounded-tl-md rounded-bl-md" type="text" name="search_query"
+                value="{{search_query}}" placeholder="Search by Parent" />
+              <input class="bg-indigo-300 px-6 text-white rounded-tr-md rounded-br-md" type="submit" value="Search" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    {% include 'pagination.html'  with queryset=profiles %}
+    <!-- Search Result: DevList -->
+    <section>
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for profile in profiles %}
+                <div>
+                    <a href="{% url 'user-profile' profile.id %}">
+                        <img src="{{profile.profile_image.url}}" alt="" />
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold">{{profile.name}}</h3>
+                        <p><a href="profile.html" class="text-blue-500">{{profile.email}}</a></p>
+                        {% for child in profile.children.all %}
+                        <p>Child: {{child}}</p>
+                        <p>School: {{ child.school }}</p>
+                        {% endfor %}
+                        <div class="flex flex-wrap mt-2">
+                        <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            <small><a href="">Edit</a></small>
+                        </span>
+                        <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            <small><a href="">Delete</a></small>
+                        </span>
+                        <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            <small><a href="">View</a></small>
+                        </span>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+            <!-- Repeat the above div for each project -->
+            </div>
+        </div>
+    </section>
+    {% include 'pagination.html'  with queryset=profiles %}
+  </main>
+{% endblock content %}

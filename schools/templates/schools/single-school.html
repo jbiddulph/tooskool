@@ -1,0 +1,108 @@
+{% extends 'main.html' %}
+{% block content %}
+<img src="{{school.featured_image.url}}" style="max-width: 500px;" alt="" />
+<h1>{{ school.establishment_name }}</h1>
+<p>URN: {{school.urn}}</p>
+<p>la name: {{school.la_name}}</p>
+<p>Est No: {{school.establishment_number}}</p>
+<p>Est Type: {{school.type_of_establishment}}</p>
+<p>Est Type Group: {{school.establishment_type_group}}</p>
+<p>Est Status: {{school.establishment_status}}</p>
+<p>Phase of education: {{school.phase_of_education}}</p>
+<p>Statutory Low Age: {{school.statutory_low_age}}</p>
+<p>Statutory High Age: {{school.statutory_high_age}}</p>
+<p>Nursery Provision: {{school.nursery_provision}}</p>
+<p>Official Sixth Form: {{school.official_sixth_form}}</p>
+<p>Gender: {{school.gender}}</p>
+<p>Religious Character: {{school.religious_character}}</p>
+<p>Religious Ethos: {{school.religious_ethos}}</p>
+<p>admissions policy: {{school.admissions_policy}}</p>
+<p>School Capacity: {{school.school_capacity}}</p>
+<p>Special Classes: {{school.special_classes}}</p>
+<p>Census Date: {{school.census_date}}</p>
+<p>No of number_of_pupils: {{school.number_of_pupils}}</p>
+<p>Boys: {{school.number_of_boys}}</p>
+<p>Girls: {{school.number_of_girls}}</p>
+<p>Percentage FSM: {{school.percentage_fsm}}</p>
+<p>Trust School Flag: {{school.trust_school_flag}}</p>
+<p>School Sponsor Flag: {{school.school_sponsor_flag}}</p>
+<p>Federation Flag: {{school.federation_flag}}</p>
+<p>Federations: {{school.federations}}</p>
+<p>UKPRN: {{school.ukprn}}</p>
+<p>Ofsted Last Inspection: {{school.ofsted_last_insp}}</p>
+<p>Street: {{school.street}}</p>
+<p>Locality: {{school.locality}}</p>
+<p>Address: {{school.address3}}</p>
+<p>Town: {{school.town}}</p>
+<p>County: {{school.county}}</p>
+<p>PostCode: {{school.postcode}}</p>
+<p>School Website: {{school.school_website}}</p>
+<p>Telephone: {{school.telephone_number}}</p>
+<p>Head Title: {{school.head_title}}</p>
+<p>Head First Name: {{school.head_first_name}}</p>
+<p>Head Last Name: {{school.head_last_name}}</p>
+<p>Head Preferred Job Title: {{school.head_preferred_job_title}}</p>
+<p>Sen 1: {{school.sen1}}</p>
+<p>Sen 2: {{school.sen2}}</p>
+<p>Sen 3: {{school.sen3}}</p>
+<p>Sen 4: {{school.sen4}}</p>
+<p>Type Of Resourced Provision: {{school.type_of_resourced_provision}}</p>
+<p>Resourced Provision Capacity: {{school.resourced_provision_capacity}}</p>
+<p>Sen unit on roll: {{school.sen_unit_on_roll}}</p>
+<p>Sen Unit Capacity: {{school.sen_unit_capacity}}</p>
+<p>Gor: {{school.gor}}</p>
+<p>District Administrative: {{school.district_administrative}}</p>
+<p>Administrative Ward: {{school.administrative_ward}}</p>
+<p>Parliamentary Constituency: {{school.parliamentary_constituency}}</p>
+<p>Urban Rural: {{school.urban_rural}}</p>
+<p>Easting: {{school.easting}}</p>
+<p>Northing: {{school.northing}}</p>
+<p>MSOA: {{school.msoa}}</p>
+<p>LSOA: {{school.lsoa}}</p>
+<p>Ofsted Rating: {{school.ofsted_rating}}</p>
+<p>Country: {{school.country}}</p>
+<p>UPRN: {{school.uprn}}</p>
+<p>Boarders: {{school.boarders}}</p>
+<p>Last Changed Date: {{school.last_changed_date}}</p>
+<p>Ofsted Special Measures: {{school.ofsted_special_measures}}</p>
+<hr>
+
+<hr>
+
+<p>{{ school.town }}</p>
+
+<div class="container mx-auto m-4">
+    {{school.vote_ratio}}% Positive Feedback {{school.vote_total}} Vote{{school.vote_total|pluralize}}
+    {% if request.user.profile.id in school.reviewers %}
+    <p>You have already submitted your review for this school</p>
+    {% elif request.user.is_authenticated %}
+    <form action="{% url 'school' school.id %}" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <label>{{field.label}}</label>
+            {{field}}
+        {% endfor %}
+        <input type="submit" value="Add Review">
+    </form>
+    {% else %}
+    <p>Please <a href="{% url 'login'%}?next={{request.path}}">login</a> to leave a review</p>
+    {% endif %}
+    <h2>Reviews</h2>
+    {% for review in school.review_set.all %}
+    {% if review.body %}
+        <h3>{{ review.title }}</h3>
+        <p>{{ review.body|linebreaksbr }}</p>
+        <p>{{ review.value }}</p>
+        <p>{{ review.created }}</p>
+        <p>
+            {{review.parent.name}}
+            <img src="{{ review.parent.profile_image.url }}" alt="">
+            {{ review.parent.name }} 
+        </p>
+    {% endif %}
+    {% endfor %}
+</div>
+
+
+
+{% endblock content %}

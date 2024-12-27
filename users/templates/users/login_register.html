@@ -1,0 +1,112 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+{% if page == 'register' %}
+<div class="relative flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="absolute inset-0 bg-center opacity-10" style="background-image: url('{% static "images/pattern.jpg" %}'); background-size: fit;" z-index: 0;></div>
+    <div class="w-full max-w-md bg-white border-2 rounded-lg p-8 z-10">
+        <div class="text-center mb-6">
+            <a href="/">
+                <img src="{% static 'images/icon.svg' %}" alt="icon" class="mx-auto mb-4" />
+            </a>
+            <h3 class="text-2xl font-semibold">Register an Account</h3>
+            <p class="text-gray-600">Hello, Welcome Back!</p>
+        </div>
+
+        <form action="{% url 'register' %}" method="POST" class="space-y-6">
+            {% csrf_token %}
+            {% for field in form%}
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">{{ field.label }}</label>
+                {{ field }}
+                <!-- {% if field.help_text %}
+                <p class="text-sm text-gray-600">{{ field.help_text }}</p>
+                {% endif %} -->
+                {% for error in field.errors %}
+                <p class="text-sm text-red-600">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <!-- Input: Username -->
+            
+
+            <div class="flex items-center justify-between">
+                <input
+                    type="submit"
+                    value="Sign Up"
+                    class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                />
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="forgetpassword.html" class="text-sm text-indigo-600 hover:text-indigo-500">Forget Password?</a>
+            </div>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">Already have an Account?</p>
+            <a href="{% url 'login' %}" class="text-sm text-indigo-600 hover:text-indigo-500">Log In</a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="relative flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="absolute inset-0 bg-center opacity-10" style="background-image: url('{% static "images/pattern.jpg" %}'); background-size: fit;" z-index: 0;></div>
+    <div class="w-full max-w-md bg-white border-2 rounded-lg p-8 z-10">
+        <div class="text-center mb-6">
+            <a href="/">
+                <img src="{% static 'images/icon.svg' %}" alt="icon" class="mx-auto mb-4" />
+            </a>
+            <h3 class="text-2xl font-semibold">Account Login</h3>
+            <p class="text-gray-600">Hello, Welcome Back!</p>
+        </div>
+
+        <form action="{% url 'login' %}" method="POST" class="space-y-6">
+            {% csrf_token %}
+            <!-- Input: Username -->
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Username:</label>
+                <input
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Enter your username..."
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
+            </div>
+
+            <!-- Input: Password -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="••••••••"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
+            </div>
+
+            <div class="flex items-center justify-between">
+                <input
+                    type="submit"
+                    value="Log In"
+                    class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                />
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'reset_password' %}" class="text-sm text-indigo-600 hover:text-indigo-500">Forgot Password?</a>
+            </div>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">Don’t have an Account?</p>
+            <a href="{% url 'register' %}" class="text-sm text-indigo-600 hover:text-indigo-500">Sign Up</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}

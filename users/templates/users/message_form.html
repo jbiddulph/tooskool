@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container mx-auto md:w-[600px] my-8">
+    <div class="flex flex-row">
+        <a href="{% url 'user-profile' recipient.id %}" class="btn">back</a>
+        <h2 class="ml-4">Message Form</h2>
+    </div>
+    <form action="" method="POST" class="mt-6">
+        {% csrf_token %}
+        {% if request.user.is_authenticated == False%}
+        <div>
+            <label>{{form.name.label}}</label>
+            {{form.name}}
+        </div>
+        <div>
+            <label>{{form.email.label}}</label>
+            {{form.email}}
+        </div>
+        {% endif %}
+        <div>
+            <label>{{form.subject.label}}</label>
+            {{form.subject}}
+        </div>
+        <div>
+            <label>{{form.body.label}}</label>
+            {{form.body}}
+        </div>
+        <input type="submit" value="Send Message" class="btn my-4">
+    </form>
+</div>
+{% endblock content %}

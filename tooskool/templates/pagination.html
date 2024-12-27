@@ -1,0 +1,39 @@
+{% if queryset.has_other_pages %}
+    <div class="pagination my-8">
+        <ul class="container mx-auto flex flex-row flex-wrap justify-center">
+
+            {% if queryset.has_previous %}
+            <li class="rounded-md text-sm p-1 m-1 bg-gray-100">
+                <a href="?page={{ queryset.previous_page_number }}" class="btn-paginate page-link" data-page="{{ queryset.previous_page_number }}">
+                    &#10094; Prev
+                </a>
+            </li>
+            {% endif %}
+
+            {% for page in paginator.page_range %}
+                {% if page <= 3 or page > paginator.num_pages|add:'-3' or page >= queryset.number|add:'-2' and page <= queryset.number|add:'2' %}
+                    {% if page == queryset.number %}
+                    <li class="rounded-md text-sm p-1 m-1 bg-gray-400 text-white font-bold text-center w-[33px]">
+                        <a href="?page={{ page }}" class="btn-paginate page-link btn--sub" data-page="{{ page }}">{{ page }}</a>
+                    </li>
+                    {% else %}
+                    <li class="rounded-md text-sm p-1 m-1 bg-gray-100 text-center w-[33px]">
+                        <a href="?page={{ page }}" class="btn-paginate page-link" data-page="{{ page }}">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% elif page == 4 or page == paginator.num_pages|add:'-4' %}
+                    <li class="rounded-md text-sm p-1 m-1 bg-gray-100 text-center w-[33px]">...</li>
+                {% endif %}
+            {% endfor %}
+
+            {% if queryset.has_next %}
+            <li class="rounded-md text-sm p-1 m-1 bg-gray-100">
+                <a href="?page={{ queryset.next_page_number }}" class="btn-paginate page-link" data-page="{{ queryset.next_page_number }}">
+                    Next &#10095;
+                </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </div>
+    {% endif %}

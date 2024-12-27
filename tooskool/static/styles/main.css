@@ -1,0 +1,33 @@
+/* Custom alert styles */
+.alert {
+    padding: 1rem;
+    position: relative;
+}
+
+.alert-success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Darker green text */
+    border-bottom: #155724 solid 0.25rem;
+}
+
+.alert-info {
+    background-color: #d1ecf1; /* Light blue background */
+    color: #0c5460; /* Darker blue text */
+    border-bottom: #0c5460 solid 0.25rem;
+}
+
+.alert-error {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Darker red text */
+    border-bottom: #721c24 solid 0.25rem;
+}
+
+.alert__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}

@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h2>Message</h2>
+    <p>{{message.subject}}</p>
+    <p>{{message.name}}</p>
+    <p>{{message.body|linebreaksbr}}</p>
+    <p>{{message.created_at}}</p>
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<!-- Main Section -->
+<main>
+    <section class="bg-indigo-100 py-8 mb-8">
+      <div class="container mx-auto md:w-[500px] w-[250px]">
+        <div>
+          <h2 class="text-4xl text-center pb-4">Search for <span class="font-bold">School</span></h2>
+        </div>
+
+        <div>
+          <form id="searchForm" class="form" action="{% url 'schools' %}" method="get">
+            {% csrf_token %}
+            <div class="flex flex-row justify-between">
+              <input id="formInput#search" class="w-full border-2 border-indigo-300 rounded-tl-md rounded-bl-md" type="text" name="search_query"
+                value="{{search_query}}" placeholder="Search by Parent" />
+              <input class="bg-indigo-300 px-6 text-white rounded-tr-md rounded-br-md" type="submit" value="Search" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Search Result: DevList -->
+    {% include 'pagination.html' with queryset=schools %}
+    <section>
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for school in schools %}
+                <div>
+                    <a href="{% url 'school' school.id %}">
+                        <img src="{{school.featured_image.url}}" alt="" />
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold">{{school.establishment_name}}</h3>
+                        <p><a href="profile.html" class="text-blue-500">{{school.town}}</a></p>
+                        <p>
+                        <span class="text-green-500">{{school.vote_ratio}}%</span> Positive Feedback ({{school.vote_total}} Vote{{school.vote_total|pluralize}})
+                        </p>
+                        <div class="flex flex-wrap mt-2">
+                        <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            <small><a href="{% url 'update-school' school.id %}">Edit</a></small>
+                        </span>
+                        <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            <small><a href="{% url 'delete-school' school.id %}">Delete</a></small>
+                        </span>
+                        <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            <small><a href="{% url 'school' school.id %}">View</a></small>
+                        </span>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {% endfor %}
+            <!-- Repeat the above div for each project -->
+            </div>
+        </div>
+    </section>
+    {% include 'pagination.html'  with queryset=schools %}
+  </main>
+{% endblock content %}
+  

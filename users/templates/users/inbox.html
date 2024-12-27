@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container mx-auto my-8">
+    <div>
+        <h2>Inbox: You have {{unreadCount}} unread messages</h2>
+        <p></p>
+    </div>
+    <table class="container mx-auto w-100 md:w-[800px] bg-slate-600 text-white">
+        {% for message in messageRequests %}
+            <tr class="{% if not message.is_read %}font-bold{% endif %} w-full">
+                <td class="p-6">
+                    <a href="{% url 'message' message.id %}">
+                        <div>{{ message.subject }}</div>
+                    </a>
+                </td>
+                <td>
+                    From: {{ message.name }}
+                </td>
+                <td align="right" class="pr-6 pl-2">
+                    Received: {{message.created_at}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"><hr /></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

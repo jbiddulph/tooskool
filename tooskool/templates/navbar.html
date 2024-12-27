@@ -1,0 +1,22 @@
+{% load static %}
+<header class="bg-slate-600 w-full">    
+    <div class="container mx-auto flex flex-row justify-between items-center w-full h-20">
+        <a href="{% url 'profiles' %}">
+            <img src="{% static 'images/logo.svg' %}" alt="DevSearch Logo" />
+        </a>
+        <nav>
+            <ul class="flex flex-row w-full text-white items-center justify-center h-auto">
+                <li class="ml-4"><a href="{% url 'profiles' %}" class="ml-4">Parents</a></li>
+                <li class="ml-4"><a href="{% url 'schools' %}" class="ml-4">Schools</a></li>
+                
+                {% if request.user.is_authenticated %}
+                <li class="ml-4"><a href="{% url 'inbox' %}" class="ml-4">Inbox</a></li>
+                <li class="ml-4"><a href="{% url 'account' %}" class="ml-4">Account</a></li>
+                <li class="ml-4"><a href="{% url 'logout' %}" class="ml-4 btn">Logout</a></li>
+                {% else %}
+                <li class="ml-4"><a href="{% url 'login' %}" class="ml-4 btn">Login/Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>

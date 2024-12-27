@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<a href="{% url 'edit-account' %}">Edit Account</a>
+{{profile.name}}
+{{profile.short_intro}}
+{{profile.email}}
+<img src="{{ profile.profile_image.url }}" width="200" alt="" />
+<ul>
+    {% if profile.social_github %}
+    <li>{{profile.social_github}}</li>
+    {% endif %}
+    {% if profile.social_linkedin %}
+    <li>{{profile.social_linkedin}}</li>
+    {% endif %}
+    {% if profile.social_youtube %}
+    <li>{{profile.social_youtube}}</li>
+    {% endif %}
+    {% if profile.social_website %}
+    <li>{{profile.social_website}}</li>
+    {% endif %}
+    {% if profile.social_facebook %}
+    <li>{{profile.social_facebook}}</li>
+    {% endif %}
+    {% if profile.social_instagram %}
+    <li>{{profile.social_instagram}}</li>
+    {% endif %}
+</ul>
+{% for child in profile.children.all %}
+<a href="{% url 'create-child' %}">Add your child</a>
+{{child}} <a href="{% url 'update-child' child.id %}">EDIT</a> | <a href="{% url 'delete-child' child.id %}">Delete</a>
+<a href="{% url 'school' child.school.id %}">{{child.school}}</a>
+{% endfor %}
+{{profile.location}}
+{{profile.created_at}}
+{{profile.updated_at}}
+
+{% endblock content %}
