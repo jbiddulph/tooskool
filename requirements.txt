@@ -37,7 +37,7 @@ numpy==1.26.3
 opencv-python==4.9.0.80
 packaging==24.2
 pandas==2.2.3
-pillow==10.1.0
+pillow==10.2.0
 platformdirs==4.3.6
 psycopg==3.2.3
 psycopg-binary==3.2.3
