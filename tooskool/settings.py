@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tooskool.netlify.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tooskool.netlify.app', 'tooskool-6f4ddc6af42e.herokuapp.com']
 
 
 
