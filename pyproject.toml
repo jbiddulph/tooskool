@@ -3,7 +3,9 @@ requires = ["setuptools>=60.0", "wheel"]
 build-backend = "setuptools.build_meta"
 [build]
   environment = { PYTHON_VERSION = "3.13" }
-[[redirects]]
+  publish = "staticfiles"
+  command = "npm install && pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput"
+[redirects]
   from = "/*"
   to = "/"
   status = 200
