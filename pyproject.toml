@@ -3,10 +3,10 @@ requires = ["setuptools>=60.0", "wheel"]
 build-backend = "setuptools.build_meta"
 [build]
   environment = { PYTHON_VERSION = "3.13" }
-  publish = "staticfiles"
   command = "npm run build"
+  publish = "build"
   base = "/"
-[redirects]
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
