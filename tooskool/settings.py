@@ -11,7 +11,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import environ
+import os
 
+load_dotenv()
+
+env = environ.Env()
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-my5df!#-8xi)fz_%@fsv80z8)s37^izsf=*2)+3^jt6jl7@g0e'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -28,18 +35,11 @@ DEBUG = False
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tooskool.netlify.app']
 
 
-from dotenv import load_dotenv
-import environ
-import os
+
 print("SUPABASE_URL via os.environ:", os.environ.get("SUPABASE_URL"))
-# Load environment variables manually
-load_dotenv()
 
-env = environ.Env()
-environ.Env.read_env()
-
-SUPABASE_URL = env("SUPABASE_URL", default="Not Set")
-SUPABASE_KEY = env("SUPABASE_KEY", default="Not Set")
+SUPABASE_URL = os.getenv("SUPABASE_URL", default="Not Set")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", default="Not Set")
 
 print("SUPABASE_URL:", SUPABASE_URL)
 
@@ -160,6 +160,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
@@ -167,7 +168,6 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR / 'tooskool' / 'static' / 'images')
-STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
