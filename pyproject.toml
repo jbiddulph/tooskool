@@ -4,8 +4,9 @@ build-backend = "setuptools.build_meta"
 [build]
   environment = { PYTHON_VERSION = "3.13" }
   publish = "staticfiles"
-  command = "npm install && pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput"
+  command = "npm run build"
+  base = "/"
 [redirects]
   from = "/*"
-  to = "/"
+  to = "/index.html"
   status = 200
