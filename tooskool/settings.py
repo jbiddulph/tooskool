@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-my5df!#-8xi)fz_%@fsv80z8)s37^izsf=*2)+3^jt6jl7@g0e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mywebsite.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tooskool.netlify.app']
 
 
 from dotenv import load_dotenv

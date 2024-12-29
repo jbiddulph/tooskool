@@ -1,0 +1,11 @@
+[build]
+  command = "npm i && pip install --upgrade pip setuptools wheel && pip install -r requirements.txt && pip install gunicorn && python manage.py migrate && python manage.py collectstatic --noinput"
+  publish = "staticfiles"
+
+[build.environment]
+  PYTHON_VERSION = "3.10"
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
