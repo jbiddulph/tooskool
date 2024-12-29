@@ -39,9 +39,7 @@ packaging==24.2
 pandas==2.2.3
 pillow==10.2.0
 platformdirs==4.3.6
-psycopg==3.2.3
 psycopg-binary==3.2.3
-psycopg2==2.9.10
 psycopg2-binary==2.9.10
 pyarrow==18.1.0
 Pygments==2.18.0
