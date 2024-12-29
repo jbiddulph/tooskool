@@ -109,11 +109,11 @@ WSGI_APPLICATION = 'tooskool.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST', default='localhost'),
-        'PORT': env('DB_PORT', default='5432'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -166,8 +166,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'tooskool' / 'static',
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'tooskool' / 'static' / 'images')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR / 'tooskool' / 'static' / 'images')
+STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
