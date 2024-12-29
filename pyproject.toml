@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 [build]
   environment = { PYTHON_VERSION = "3.13" }
   command = "npm run build"
-  publish = "build"
+  publish = "dist"
   base = "/"
 [[redirects]]
   from = "/*"
