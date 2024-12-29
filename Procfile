@@ -1,1 +1,1 @@
-web: gunicorn tooskool.wsgi
+web: gunicorn tooskool.wsgi --log-file -
